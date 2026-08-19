@@ -1,16 +1,20 @@
 class Solution {
 public:
     int thirdMax(vector<int>& nums) {
-        set<int> top3;
+        sort(nums.begin(),nums.end());
 
-        for (int num : nums) {
-            top3.insert(num);
-            if (top3.size() > 3) {
-                top3.erase(top3.begin());  
+        int count = 1;
+        int n = nums.size();
+        
+        for(int i=n-1; i > 0; i--){
+            if(nums[i] != nums[i-1]){
+                count++;
+
+                if (count == 3) {
+                    return nums[i-1];
+                }
             }
         }
-
-       
-        return top3.size() == 3 ? *top3.begin() : *top3.rbegin();
+        return nums[n-1]; 
     }
 };
